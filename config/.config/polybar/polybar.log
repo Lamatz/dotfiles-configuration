@@ -1,0 +1,21 @@
+polybar|notice:  Parsing config file: /home/dan/.config/polybar/config.ini
+polybar|error: Invalid value for "bar/main.monitor", using default value (reason: Environment var ${MONITOR} does not exist (no fallback set))
+polybar|notice:  Loading module 'i3' of type 'internal/i3'
+polybar|notice:  Loading module 'wireless' of type 'internal/wireless'
+polybar|error: Disabling module "wireless" (reason: Unknown module: internal/wireless)
+polybar|notice:  Loading module 'brightness' of type 'internal/backlight'
+polybar|notice:  Loading module 'pulseaudio' of type 'internal/pulseaudio'
+polybar|notice:  pulseaudio: using default sink alsa_output.pci-0000_00_1f.3.analog-stereo
+polybar|error: Invalid value for "module/pulseaudio.format-muted-prefix-foreground", using default value (reason: The reference ${colors.disabled} does not exist (no fallback set))
+polybar|notice:  Loading module 'battery' of type 'internal/battery'
+polybar|notice:  Loading module 'date' of type 'internal/date'
+polybar|notice:  Loaded 5 modules
+polybar|notice:  Loaded font "Iosevka Nerd Font:style=Regular:pixelsize=12;antialias=true" (name=Iosevka, offset=0, file=/home/dan/.local/share/fonts/iosevka_nerd_font.ttf)
+polybar|notice:  Loaded font "Noto Color Emoji:scale=10;antialias=true" (name=Noto Color Emoji, offset=0, file=/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf)
+polybar|warn:  background_manager: Failed to get root pixmap, default to black (is there a wallpaper?)
+polybar|warn:  background_manager: Failed to get root pixmap, default to black (is there a wallpaper?)
+polybar|warn:  background_manager: Failed to get root pixmap, default to black (is there a wallpaper?)
+polybar|warn:  background_manager: Failed to get root pixmap, default to black (is there a wallpaper?)
+polybar|notice:  Received signal(2): Interrupt
+polybar|notice:  Termination signal received, shutting down...
+polybar|warn:  module/i3: Attempting to reconnect socket (reason: Unexpected EOF while reading header)

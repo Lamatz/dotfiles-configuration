@@ -1,0 +1,105 @@
+	
+# Import section
+[general]
+import = ["catppuccin-frappe.toml"]
+
+# Environment section (clearly separate)
+[env]
+TERM = "xterm-256color"
+
+
+
+# Font configuration
+[font]
+# Font family.
+# The `family` will be used for styles not explicitly defined below,
+# or Alacritty will try to find matching styles within this family.
+normal = { family = "JetBrains Mono", style = "Regular" }
+bold = { family = "JetBrains Mono", style = "Bold" }
+italic = { family = "JetBrains Mono", style = "Italic" }
+
+# Font size (points)
+size = 10 # Adjust this to your liking (common range 10-14)
+
+# Offset for drawing glyphs (fine-tuning, usually not needed)
+# offset = { x = 0, y = 0 }
+
+# Glyph offset can be used to align Nerd Font icons better if they seem off.
+# glyph_offset = { x = 0, y = 0 }
+
+# Window Configuration
+[window]
+# Window dimensions (in character cells, or pixels if `use_thin_strokes` is true and `padding` is used)
+# This might be overridden by your tiling window manager (like i3)
+dimensions = { columns = 82, lines = 24 }
+
+# Window padding (in pixels)
+# Adds space between the window border and the text
+padding = { x = 8, y = 8 } # Adjust x and y for more/less padding
+
+# Window decorations
+# "full", "none", or "transparent" (transparent needs compositor and specific OS support)
+# For i3, "none" is common as i3 handles borders.
+decorations = "full"
+
+# Window startup mode (Windowed, Maximized, Fullscreen)
+# startup_mode = "Windowed"
+
+# Background opacity (0.0 to 1.0)
+# Requires a compositor like Picom to be running for actual transparency.
+opacity = 1.0
+# Set to 1.0 for fully opaque. Adjust for desired transparency.
+
+# Scrolling
+[scrolling]
+# Number of lines of history to keep
+history = 10000
+
+# Multiplier for scroll speed (how many lines to scroll at a time)
+# multiplier = 3
+
+# Cursor Customization
+[cursor]
+# Cursor style: "Block", "Underline", or "Beam"
+style = { shape = "Block", blinking = "On" } # Or blinking = "Off", "Always"
+
+# Vi-mode cursor style (if you use Alacritty's vi mode)
+# vi_mode_style = { shape = "Block", blinking = "Off" }
+
+# Thickness of the cursor (0.0 to 1.0 relative to cell width for Block/Underline)
+# For Block cursor, this isn't usually noticeable unless very thin.
+# For Underline, it's the thickness of the line.
+# thickness = 0.15
+
+# Mouse settings
+[mouse]
+# Hide the mouse cursor when typing
+hide_when_typing = true
+
+
+
+
+# Key bindings (Optional - Alacritty has sane defaults)
+# You can add custom key bindings here if needed, for example, to copy/paste
+# or change font size.
+# [[keyboard.bindings]]
+# key = "V"
+# mods = "Control|Shift"
+# action = "Paste"
+
+# [[keyboard.bindings]]
+# key = "C"
+# mods = "Control|Shift"
+# action = "Copy"
+
+# [[keyboard.bindings]]
+# key = "Equals" # The = key
+# mods = "Control"
+# action = "IncreaseFontSize"
+
+# [[keyboard.bindings]]
+# key = "Minus" # The - key
+# mods = "Control"
+# action = "DecreaseFontSize"
+
+
