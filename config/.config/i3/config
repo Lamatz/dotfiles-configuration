@@ -28,7 +28,7 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork -i ~/wallpaper/wallpaper6.png
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -204,26 +204,27 @@ exec --no-startup-id picom -b
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id copyq
 
-# Set wallpaper using feh
-#exec_always --no-startup-id feh --bg-scale ~/wallpaper/wallpaper1.jpg
 
 # SCREENSHOT
-bindsym $mod+Shift+s exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
+ bindsym $mod+Shift+s exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
 
 # Show/Toggle CopyQ clipboard manager
 bindsym $mod+v exec --no-startup-id copyq toggle
 
 
-# Brightness control
+# WALLPAPER
+exec_always --no-startup-id feh --bg-scale ~/wallpaper/wallpaper3.jpg
+
+# BRIGHTNESS CONTROL
 # Decrease brightness (Your Fn+F11 key, which sends F11)
 bindsym F11 exec --no-startup-id brightnessctl set 5%-
-
 # Increase brightness (Your Fn+F12 key, likely sends F12 - verify with xev)
 bindsym F12 exec --no-startup-id brightnessctl set +5%
 
-# Lock the screen with i3lock's default plain background
-bindsym $mod+F9 exec --no-startup-id /usr/bin/i3lock
 
+# Lock the screen with i3lock's default plain background
+#bindsym $mod+F9 exec --no-startup-id /usr/bin/i3lock
+bindsym $mod+F9 exec --no-startup-id i3lock -i ~/wallpaper/wallpaper6.png
 
 # For new tiled windows
 new_window pixel 1

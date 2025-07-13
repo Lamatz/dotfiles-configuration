@@ -56,19 +56,40 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+
+
+# This variable will hold the Git branch string, with color
+GIT_PROMPT_STRING="\$(if [ -n \"\$(parse_git_branch)\" ]; then echo \"\[\033[01;33m\](\$(parse_git_branch))\[\033[00m\]\"; fi)"
+
+
+# This variable will hold the Git branch string, without color
+GIT_PROMPT_STRING_NO_COLOR="\$(if [ -n \"\$(parse_git_branch)\" ]; then echo \"(\$(parse_git_branch))\"; fi)"
+
+
+
 if [ "$color_prompt" = yes ]; then
 
-PS1='\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# PS1='\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$'
+
+ PS1="\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]${GIT_PROMPT_STRING}\\$ "
 
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+
+#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+
+PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w'"${GIT_PROMPT_STRING_NO_COLOR}"'\\$ '
+
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+
+#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+
+ PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+
     ;;
 *)
     ;;
@@ -136,5 +157,92 @@ alias openjn='source ~/.virtualenvs/jupyter_env/bin/activate && jupyter notebook
 
 
 #Terminal Directory shortcuts
-alias phpopen='cd /var/www/html'
+alias openphp='cd /var/www/html'
 . "$HOME/.cargo/env"
+
+
+# Alias for opening Config files
+alias openconfig='cd ~/dotfiles/config/.config'
+
+
+# Alias for opening thesis 
+function openthesis() {
+
+
+    # Define the project directory path for easier use
+    local proj_dir="$HOME/Two-Steep-Ahead"
+    # Define a log file inside the backend directory
+    local log_file="$proj_dir/backend/server.log"
+
+    cd "$proj_dir" && \
+
+    # 1. Change to the project directory. Using ~/ assumes it's in your home folder.
+    # The '&&' means the next command will only run if the 'cd' is successful.
+    # cd ~/Two-Steep-Ahead && \
+
+    # 2. Activate the virtual environment
+    source venv/bin/activate && \
+
+    # 3. Open VSCodium in the background (the '&' is important)
+    echo "Opening VSCodium..."
+    codium . & \
+
+
+
+    # This is the key change: redirect stdout and stderr to the log file
+#    nohup python3 backend/server.py > "$log_file" 2>&1 &
+
+#    echo "Server is running detached. Use 'tail -f' to see logs."
+
+    # 4. Start the Python server in the background (the '&' is important)
+    # echo "Starting Python backend server..."
+    # nohup python3 backend/server.py > /dev/null 2>&1 &
+
+    # echo "Server is now running fully detached in the background."
+
+    # Optional: A message to confirm everything is running
+}
+
+
+# Alias for show all aliases
+function cheatsheet() {
+    # This is the config file. Change to ~/.zshrc if you use Zsh.
+    local config_file="$HOME/.bashrc"
+
+    echo "--- My Custom Aliases ---"
+    # Grep for lines starting with 'alias', then format into columns.
+    grep '^alias' "$config_file" | column -t -s '='
+
+    echo -e "\n--- My Custom Functions ---"
+    # Grep for lines starting with 'function' to show their names.
+    grep '^function' "$config_file"
+}
+
+
+parse_git_branch() {
+  git branch --show-current 2>/dev/null
+}
+
+
+function stop_tsa() {
+    # Define the port your server runs on
+    local port=5000
+    echo "Attempting to stop server on port ${port}..."
+
+    # lsof -t gives only the PID, which is perfect for scripting.
+    # The output is captured into the 'pids' variable.
+    local pids=$(lsof -t -i :${port})
+
+    # Check if the 'pids' variable is empty
+    if [ -z "$pids" ]; then
+        echo "No server found running on port ${port}."
+        return 1 # Fails with an error code
+    else
+        echo "Found server process(es) with PID(s): $pids"
+        # Use kill -9 for a forceful stop, which is often necessary
+        # for stubborn development servers.
+        kill -9 $pids
+        echo "Kill signal sent. Server on port ${port} should be stopped."
+        return 0 # Succeeds
+    fi
+}
